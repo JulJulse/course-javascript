@@ -1,10 +1,4 @@
-import {
-  returnArgumentsArray,
-  returnCounter,
-  returnFirstArgument,
-  returnFnResult,
-  sumWithDefaults,
-} from './index';
+import { returnFirstArgument, returnFnResult, sumWithDefaults } from './index';
 
 describe('ДЗ 1 - функции', () => {
   describe('returnFirstArgument', () => {

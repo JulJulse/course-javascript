@@ -11,6 +11,7 @@
     "build:prod": "NODE_ENV=production webpack --progress",
     "watch": "webpack serve",
     "start": "npm run watch",
+    "lint": "eslint . --ext .js,.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "prepare": "husky install"
