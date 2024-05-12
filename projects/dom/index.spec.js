@@ -1,12 +1,13 @@
-import { randomValue } from '../../scripts/helper';
 import {
   collectDOMStat,
   createDivWithText,
-  deleteTextNodes,
+  removeTextNodes,
   findAllPSiblings,
   findError,
   prepend,
 } from './index';
+
+import { randomValue } from '../../scripts/helper';
 
 function random(type) {
   const result = randomValue(type);
@@ -79,12 +80,12 @@ describe('ДЗ 4 - Работа с DOM', () => {
     });
   });
 
-  describe('deleteTextNodes', () => {
+  describe('removeTextNodes', () => {
     it('должна удалить все текстовые узлы', () => {
       const where = document.createElement('div');
 
       where.innerHTML = ` <div></div>${random('string')}<p></p>${random('string')}`;
-      deleteTextNodes(where);
+      removeTextNodes(where);
 
       expect(where.innerHTML).toBe('<div></div><p></p>');
     });
