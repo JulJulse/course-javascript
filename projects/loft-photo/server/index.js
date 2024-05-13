@@ -1,3 +1,17 @@
+import { type } from 'node:os';
+import pages from './pages';
+import { listeners } from 'node:process';
+import('./styles.css');
+
+const pageNames = ['login', 'main', 'profile'];
+
+document.addEventListener( type: 'click', listener () => {
+  const pageName = model.getRandomElement(pageNames);
+  pages.openPage(pageName);
+  });
+
+
+
 const http = require('node:http');
 const https = require('node:https');
 const url = require('node:url');
