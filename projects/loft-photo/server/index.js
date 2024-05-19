@@ -5,18 +5,15 @@ import('./styles.css');
 
 const pageNames = ['login', 'main', 'profile'];
 
-document.addEventListener( type: 'click', listener () => {
-  const pageName = model.getRandomElement(pageNames);
-  pages.openPage(pageName);
-  });
+
+import mainPage from './mainPage';
+import loginPage from './loginPage';
+
+pages.openPage('login');
+loginPage.handleEvents();
+mainPage.handleEvents();
 
 
-
-
-
-
-
-  
 
 const http = require('node:http');
 const https = require('node:https');
