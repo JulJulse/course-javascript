@@ -7,12 +7,21 @@ export default {
     this.setFriendAndPhoto(friend, id, url);
   },
 
-  setFriendAndPhoto(friend, id, url) {},
+  setFriendAndPhoto(friend, id, url) {
+    const photoComp = document.querySelector('.component-photo');
+    const headerPhoto = document.querySelector('.component-header-photo');
+    const headerNameComp =document.querySelector('.component-header-name');
+
+    headerPhoto.style.backgroundImage = `url('${friend.photo_50}')`;
+    headerNameComp.innerText = `${friend.first_name} ${friend.last_name}`;
+    photoComp.style.backgroundImage = `url('${url}')`;
+  }
+,
 
   handleEvents() {
     let startFrom;
 
-    document.querySelector('.component-photo').addEventListener('touchstatr', (e) => {
+    document.querySelector('.component-photo').addEventListener('touchstatrеt', (e) => {
         const direction = {y: e.changedTouches[0].pageY};
     });
 

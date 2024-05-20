@@ -56,12 +56,29 @@ async init() {
 },
 
 login() {
-
-}, 
+  return new Promise((resolve, reject) => {
+    Vk.Auth.login(function (response) {
+      if (response.session) {
+        resolve(response);
+      } else {
+        reject(new Error('Ошибка авторизации'));
+      }
+    }, PERM_FRIENDS | PERM_PHOTOS);
+  });
+},
 
 logout() {
+  return new Promise((resolve, reject) => {
+    Vk.Auth.logout(function (response) {
+      if (response.success) {
+        resolve(response);
+      } else {
+        reject(new Error('Ошибка выхода'));
+      }
+    });
+  });
+}
 
-},
 
 callApi(method, params) {
   params.v = params.v || '5.120';
