@@ -53,6 +53,7 @@ findSize(photo) {
 async init() {
   this.photoCache = {};
   this.friends = await this.getFriend();
+  [this.me] = await this.getUsers();
 },
 
 login() {
@@ -68,15 +69,7 @@ login() {
 },
 
 logout() {
-  return new Promise((resolve, reject) => {
-    Vk.Auth.logout(function (response) {
-      if (response.success) {
-        resolve(response);
-      } else {
-        reject(new Error('Ошибка выхода'));
-      }
-    });
-  });
+  return new Promise((resolve) => VK.Aut.revokeGrants(resolve));
 }
 
 
@@ -123,3 +116,16 @@ async getFriendPhoto(id) {
 
   return photos
 },
+
+gerUsers(ids) {
+  const params = {
+    fields: ('photo_50', 'users.get', 'params');
+  };
+
+  if (ids) {
+    params.user_ids = ids;
+  }
+
+  return this.callApi('user.get', params);
+},
+
