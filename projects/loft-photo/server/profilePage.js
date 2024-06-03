@@ -1,47 +1,45 @@
 import model from './model';
 import mainPage from './mainPage';
 import pages from './pages';
-import { electron } from 'webpack';
-import { profile } from 'console';
 
 export default {
   async setUser(user) {
-    const photoComp = document.querySelector('component-user-info-photo');
-    const nameComp = document.querySelector('component-user-info-name');
-    const photoComp = document.querySelector('component-user-info-photos');
+    const photoComp = document.querySelector('.component-user-info-photo');
+    const nameComp = document.querySelector('.component-user-info-name');
+    const photosComp = document.querySelector('.component-user-photos');
     const photos = await model.getPhotos(user.id);
 
     this.user = user;
 
-    photoComp.style.backgroundImage = 'url('${user.photo__100')';
-    nameComp.innerText = '${user.first_name ?? ''} ${user.last_name ?? ''}';
+    photoComp.style.backgroundImage = `url('${user.photo_100}')`;
+    nameComp.innerText = `${user.first_name ?? ''} ${user.last_name ?? ''}`;
     photoComp.innerHTML = '';
 
     for (const photo of photos.items) {
-      const size = model.Findsize(photo);
+      const size = model.findSize(photo);
       const element = document.createElement('div');
 
       element.classList.add('component-user-photo');
-      element.dataset.id =photo.id;
-      element.style.backgroundImage = 'url(${size.url'})';
-      photoComp.append(element);
+      element.dataset.id = photo.id;
+      element.style.backgroundImage = `url(${size.url})`;
+      photoComp.append(element);      
     }
   },
 
   handleEvents() {
     document
-    .querySelector('component-user-photo')
-    .addEventListener('click', async (e) => {
-      if (e.target.classList.contains('component-user-photo')) {
-        const photoId = e.target.dataset.id;
-        const friendsPhotos = await model.getPhotos(this.user.id);
-        const photo = friendsPhotos.items.find(photoId);
-        const size = model.findSize(photo);
+      .querySelector('.component-user-photos')
+      .addEventListener('click', async (e) => {
+        if (e.target.classList.contains('component-user-photo')) {
+          const photoId = e.target.dataset.id;
+          const friendsPhotos = await model.getPhotos(this.user.id);
+          const photo = friendsPhotos.items.find((photo) => photo.id == photoId);
+          const size = model.findSize(photo);
 
-        mainPage.setFriendAndPhoto(this.user, parsetInt(pgotoId), size.url);
-        pages.openPage('main');
-      }
-    });
+          mainPage.setFriendAndPhoto(this.user, parseInt(photoId), size.url);
+          pages.openPage('main');          
+        }
+      });
 
     document.querySelector('.page-profile-back').addEventListener('click', async () => {
       pages.openPage('main');
